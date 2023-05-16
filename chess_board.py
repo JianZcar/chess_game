@@ -12,10 +12,11 @@ def chess_board(square_size: int = 80, border_thickness: int = 40,
                                        board + (border_thickness * 2)), border_thickness)
     for i in range(8):
         text = font.render(x[i], False, (0, 0, 0))
-        screen.blit(text, (border_thickness + (i * square_size),
-                           border_thickness + (square_size * 8)))
+        screen.blit(text, (border_thickness + (i * square_size) + (square_size / 2) - 10,
+                           border_thickness + (square_size * 8) + 5))
         text = font.render(y[i], False, (0, 0, 0))
-        screen.blit(text, (20, border_thickness + (i * square_size) + (square_size - 25)))
+        screen.blit(text, ((border_thickness / 2) - 5,
+                           border_thickness + (i * square_size) + (square_size / 2) - 10))
     location = (border_thickness, border_thickness)
     for row in range(8):
         for col in range(8):
