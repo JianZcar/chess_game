@@ -67,6 +67,6 @@ class ChessPiece:
 
     def draw(self, screen=pg.display.set_mode((1280, 720)),
              square_size: int = 80, border_thickness: int = 40):
-        p = 4 if self.color == 0 else -2
+        p = 6 if self.color == 0 else 0
         screen.blit(self.sprite(), (self.location[0] * square_size + border_thickness,
                                     ((7 - self.location[1]) * square_size + border_thickness + p)))
