@@ -70,3 +70,11 @@ class ChessPiece:
         p = 6 if self.color == 0 else 0
         screen.blit(self.sprite(), (self.location[0] * square_size + border_thickness,
                                     ((7 - self.location[1]) * square_size + border_thickness + p)))
+
+
+def game_icon():
+    chess_pieces = pg.image.load("chess_pieces.png")
+    cropped_region = (286 * 1, 286 * 1, 286, 286)
+    chess_piece = pg.Surface.subsurface(chess_pieces, cropped_region)
+    chess_piece = pg.transform.scale(chess_piece, (80, 80))
+    return chess_piece

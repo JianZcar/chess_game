@@ -7,6 +7,7 @@ pg.font.init()
 font = pg.font.SysFont('Consolas', 30)
 SCREEN_HEIGHT = 1280
 SCREEN_WIDTH = 720
+pg.display.set_icon(cp.game_icon())
 screen = pg.display.set_mode((SCREEN_HEIGHT, SCREEN_WIDTH))
 pg.display.set_caption("Chess")
 clock = pg.time.Clock()

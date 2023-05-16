@@ -5,8 +5,8 @@ pg.font.init()
 def chess_board(square_size: int = 80, border_thickness: int = 40,
                 font=pg.font.SysFont('Consolas', 30), screen=pg.display.set_mode((1280, 720)),
                 board_color=pg.Color(255, 234, 230)):
-    x = ["A", "B", "C", "D", "E", "F", "G", "H"]
-    y = ["1", "2", "3", "4", "5", "6", "7", "8"][::-1]
+    x = "ABCDEFGH"
+    y = "12345678"[::-1]
     board = square_size * 8
     pg.draw.rect(screen, board_color, (0, 0, board + (border_thickness * 2),
                                        board + (border_thickness * 2)), border_thickness)
