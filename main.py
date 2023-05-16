@@ -1,5 +1,6 @@
 import pygame as pg
 import chess_board as cb
+import chess_pieces as cp
 
 pg.init()
 pg.font.init()
@@ -11,27 +12,23 @@ pg.display.set_caption("Chess")
 clock = pg.time.Clock()
 
 
-class Piece:
-    def __init__(self, color: str, piece_type: str, location: tuple):
-        self.color = color
-        self.piece_type = piece_type
-        self.location = location
-        self.image = pg.image.load(f"images/{self.color}_{self.piece_type}.png")
-        self.image = pg.transform.scale(self.image, (80, 80))
-
-    def draw(self):
-        screen.blit(self.image, self.location)
-
-
 def fps_cap(fps: int = 60, time=clock):
     time.tick(fps)
 
 
-chess_pieces = pg.image.load("chess_pieces.png")
-cropped_region = (320 * 0, 320 * 0, 290, 290)
-chess_piece = pg.Surface.subsurface(chess_pieces, cropped_region)
-chess_piece = pg.transform.scale(chess_piece, (80, 80))
+king = cp.ChessPiece(color=0, piece_type=0, location=(0, 0))
+queen = cp.ChessPiece(color=0, piece_type=1, location=(1, 0))
+pawn = cp.ChessPiece(color=0, piece_type=5, location=(2, 0))
+rook = cp.ChessPiece(color=0, piece_type=2, location=(3, 0))
+knight = cp.ChessPiece(color=0, piece_type=3, location=(4, 0))
+bishop = cp.ChessPiece(color=0, piece_type=4, location=(5, 0))
 
+b_king = cp.ChessPiece(color=1, piece_type=0, location=(0, 7))
+b_queen = cp.ChessPiece(color=1, piece_type=1, location=(1, 7))
+b_pawn = cp.ChessPiece(color=1, piece_type=5, location=(2, 7))
+b_rook = cp.ChessPiece(color=1, piece_type=2, location=(3, 7))
+b_knight = cp.ChessPiece(color=1, piece_type=3, location=(4, 7))
+b_bishop = cp.ChessPiece(color=1, piece_type=4, location=(5, 7))
 
 running = True
 while running:
@@ -40,7 +37,19 @@ while running:
         if event.type == pg.QUIT:
             running = False
     cb.chess_board(screen=screen)
-    screen.blit(chess_piece, (0, 0))
+    king.draw(screen=screen)
+    queen.draw(screen=screen)
+    pawn.draw(screen=screen)
+    rook.draw(screen=screen)
+    knight.draw(screen=screen)
+    bishop.draw(screen=screen)
+
+    b_king.draw(screen=screen)
+    b_queen.draw(screen=screen)
+    b_pawn.draw(screen=screen)
+    b_rook.draw(screen=screen)
+    b_knight.draw(screen=screen)
+    b_bishop.draw(screen=screen)
     pg.display.update()
     pass
 
