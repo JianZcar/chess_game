@@ -2,27 +2,33 @@ import pygame as pg
 pg.font.init()
 
 
-def chess_board(square_size: int = 80, border_thickness: int = 40,
-                font=pg.font.SysFont('Consolas', 30), screen=pg.display.set_mode((1280, 720)),
-                board_color=pg.Color(255, 234, 230)):
-    x = "ABCDEFGH"
-    y = "12345678"[::-1]
+def border(square_size: int, color=pg.Color(255, 234, 230), border_thickness: int = 40) -> (pg.Rect, pg.Color):
     board = square_size * 8
-    pg.draw.rect(screen, board_color, (0, 0, board + (border_thickness * 2),
-                                       board + (border_thickness * 2)), border_thickness)
-    for i in range(8):
-        text = font.render(x[i], False, (0, 0, 0))
-        screen.blit(text, (border_thickness + (i * square_size) + (square_size / 2) - 10,
-                           border_thickness + (square_size * 8) + 5))
-        text = font.render(y[i], False, (0, 0, 0))
-        screen.blit(text, ((border_thickness / 2) - 5,
-                           border_thickness + (i * square_size) + (square_size / 2) - 10))
-    location = (border_thickness, border_thickness)
+    border_ = pg.Rect(0, 0, board + (border_thickness * 2), board + (border_thickness * 2))
+    return border_, color
+
+
+def tiles(square_size: int, screen_location: int, w_color=pg.Color("white"),
+          b_color=pg.Color("gray")) -> (pg.Rect, pg.Color):
     for row in range(8):
         for col in range(8):
             if (row + col) % 2 == 0:
-                color = pg.Color("white")
+                color = w_color
             else:
-                color = pg.Color("gray")
-            pg.draw.rect(screen, color, (location[0] + col * square_size, location[1] + row * square_size,
-                                         square_size, square_size))
+                color = b_color
+            tile = pg.Rect(col * square_size + screen_location,
+                           row * square_size + screen_location, square_size, square_size)
+            yield tile, color
+
+
+def chess_coordinates(square_size: int, border_thickness,
+                      font=pg.font.SysFont('Consolas', 30)) -> (pg.Surface, pg.Surface):
+    x = "ABCDEFGH"
+    y = "12345678"[::-1]
+    for i in range(8):
+        text1 = font.render(x[i], False, (0, 0, 0))
+        text2 = font.render(y[i], False, (0, 0, 0))
+        yield ((text1, ((border_thickness + (i * square_size) + (square_size / 2) - 10,
+                        border_thickness + (square_size * 8) + 5))),
+               (text2, ((border_thickness / 2) - 5,
+                        border_thickness + (i * square_size) + (square_size / 2) - 10)))
